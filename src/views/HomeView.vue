@@ -12,8 +12,8 @@
         focus:outline-none 
         focus:shadow-[0px_1px_0_0_#00E71]">
     </div>
-    <ul v-if="searchResults">
-      <li v-for="place in searchResults" :key="place.id">
+    <ul v-if="searchResults" class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1">
+      <li v-for="place in searchResults" :key="place.id" class="py-2 cursor-pointer hover:bg-weather-primary">
         {{ place.display_name }}
       </li>
     </ul>
