@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "esModuleInterop": true,
+    // Other TypeScript compiler options...
+  },
+}
