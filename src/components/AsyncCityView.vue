@@ -103,65 +103,45 @@
                 <div class="flex gap-10 overflow-x-scroll">
                     <div v-for="hourData in weatherData.hourly.time" :key="hourData"
                         class="flex flex-col gap-4 items-center">
-                        <p class="whitespace-nowrap text-md">
-                            {{ new Date(hourData).toLocaleTimeString("en-us", {
-                                hour: "numeric"
-                            }) }}
-                        </p>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 0" class="fa-solid fa-sun p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 1" class="fa-solid fa-sun p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 2" class="fa-solid fa-cloud-sun p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 3" class="fa-solid fa-cloud p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 45" class="fa-solid fa-smog p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 48" class="fa-solid fa-smog p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 51" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 53" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 55" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 56" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 56" class="fa-solid fa-snowflake p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 57" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 57" class="fa-solid fa-snowflake p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 61" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 63" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 65" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 66" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 66" class="fa-solid fa-snowflake p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 67" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 67" class="fa-solid fa-snowflake p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 71" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 73" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 75" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 77" class="fa-solid fa-snowflake p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 80" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 81" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 82" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 85" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 86" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 95" class="fa-solid fa-cloud-bolt p-3 text-3xl"></i>
-
-
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 96" class="fa-solid fa-cloud-meatball p-3 text-3xl"> Slight Hail</i>
-                        <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 99" class="fa-solid fa-cloud-meatball p-3 text-3xl"> Heavy Hail</i>
+                        <template v-if="new Date(hourData).getDate() === new Date(weatherData.current_weather.time).getDate()">
+                            <p class="whitespace-nowrap text-md">
+                                {{ new Date(hourData).toLocaleTimeString("en-us", {
+                                    hour: "numeric"
+                                }) }}
+                            </p>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 0" class="fa-solid fa-sun p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 1" class="fa-solid fa-sun p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 2" class="fa-solid fa-cloud-sun p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 3" class="fa-solid fa-cloud p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 45" class="fa-solid fa-smog p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 48" class="fa-solid fa-smog p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 51" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 53" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 55" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 56" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 56" class="fa-solid fa-snowflake p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 57" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 57" class="fa-solid fa-snowflake p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 61" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 63" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 65" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 66" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 66" class="fa-solid fa-snowflake p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 67" class="fa-solid fa-cloud-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 67" class="fa-solid fa-snowflake p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 71" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 73" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 75" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 77" class="fa-solid fa-snowflake p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 80" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 81" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 82" class="fa-solid fa-cloud-sun-rain p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 85" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 86" class="fa-solid fa-cloud-meatball p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 95" class="fa-solid fa-cloud-bolt p-3 text-3xl"></i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 96" class="fa-solid fa-cloud-meatball p-3 text-3xl"> Slight Hail</i>
+                            <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 99" class="fa-solid fa-cloud-meatball p-3 text-3xl"> Heavy Hail</i>
+                        </template>
                     </div>
                 </div>
             </div>
