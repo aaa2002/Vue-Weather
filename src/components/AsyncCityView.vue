@@ -141,11 +141,17 @@
                             <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 95" class="fa-solid fa-cloud-bolt p-3 text-3xl"></i>
                             <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 96" class="fa-solid fa-cloud-meatball p-3 text-3xl"> Slight Hail</i>
                             <i v-if="weatherData.hourly.weathercode[weatherData.hourly.time.indexOf(hourData)] === 99" class="fa-solid fa-cloud-meatball p-3 text-3xl"> Heavy Hail</i>
+                            <p class="text-xl">
+                                {{ Math.round(weatherData.hourly.temperature_2m[weatherData.hourly.time.indexOf(hourData)]) }}&deg;C
+                            </p>
                         </template>
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <hr class="border-white border-opacity-10 border w-full" />
     </div>
 </template>
 
