@@ -15,7 +15,7 @@
     <ul v-if="searchResults" class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1">
       <p v-if="searchError"> Sorry, something went wrong, please try again.</p>
 
-      <p v-if="searchResults.length === 0">No results found.</p>
+      <p v-if="searchResults && searchResults.length === 0">No results found.</p>
       <li v-for="place in searchResults" :key="place.id" class="py-2 cursor-pointer hover:bg-weather-primary"
         @click="previewCity(place)">
         {{ place.display_name }}
@@ -32,7 +32,7 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
@@ -41,11 +41,11 @@ import CityCardSkeleton from '../components/CityCardSkeleton.vue'
 
 const router = useRouter();
 const searchQuery = ref('');
-const queryTimeout = ref(null);
-const searchResults = ref(null);
-const searchError = ref(null);
+const queryTimeout = ref<ReturnType<typeof setTimeout> | undefined>(undefined);
+const searchResults = ref<Array<any> | null>(null);;
+const searchError = ref(false);
 
-const previewCity = (place) => {
+const previewCity = (place: any) => {
   console.log(place);
   const [lat, lon, location] = [place.lat, place.lon, place.display_name];
   console.log(lat, lon, location);
@@ -57,7 +57,7 @@ const previewCity = (place) => {
     query: {
       latitude: lat,
       longitude: lon,
-      preview: true
+      preview: true.toString()
     }
   });
 };

@@ -161,7 +161,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -195,10 +195,19 @@ console.log(weatherData.hourly.precipitation_probability);
 const getCurrent = () => {
 
     const index = weatherData.hourly.time.findIndex(
-        (element) => new Date(element).getTime() === new Date(weatherData.current_weather.time).getTime()
+        (element: any) => new Date(element).getTime() === new Date(weatherData.current_weather.time).getTime()
     );
     return index !== -1 ? index : 0;
 
+}
+
+interface CityData {
+  id: string;
+  location: string;
+  coords: {
+    lat: number;
+    lon: number;
+  };
 }
 
 
@@ -209,8 +218,9 @@ console.log(precip, weatherCode, weatherData.hourly.time);
 const router = useRouter();
 
 const removeCity = () => {
-    const cities = JSON.parse(localStorage.getItem('savedCities'));
-    const updatedCities = cities.filter((city) => city.id !== route.query.id);
+    const cities: CityData[] = JSON.parse(localStorage.getItem('savedCities') ?? '[]');
+
+    const updatedCities = cities.filter((city: any) => city.id !== route.query.id);
 
     localStorage.setItem('savedCities', JSON.stringify(updatedCities));
 

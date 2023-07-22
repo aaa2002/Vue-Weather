@@ -25,7 +25,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = `${ to.params.location ? `${to.params.location.split(',')[0]}` : to.meta.title} | The Local Weather`;
+  document.title = `${to.params.location ? `${(to.params.location as string).split(',')[0]}` : to.meta.title} | The Local Weather`;
   next();
 });
 

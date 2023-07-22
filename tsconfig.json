@@ -12,6 +12,7 @@
     "target": "es6",
     "module": "es6",
     "esModuleInterop": true,
+    "allowJs": true,
     // Other TypeScript compiler options...
   },
 }
