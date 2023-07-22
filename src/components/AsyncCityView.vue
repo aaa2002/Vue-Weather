@@ -11,7 +11,7 @@
         <!-- Weather Overview -->
 
         <div class="flex flex-col items-center text-white py-12">
-            <h1 class="text-4xl mb2">{{ route.params.location }}</h1>
+            <h1 class="text-3xl mb2 text-center py-2">{{ route.params.location }}</h1>
             <p class="text-sm mb-12">
                 {{ new Date(weatherData.current_weather.time).toLocaleDateString("en-US", {
                     weekday: "short",
