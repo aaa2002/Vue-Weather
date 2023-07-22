@@ -27,6 +27,8 @@ const getCities = async () => {
 
         const weatherData = await Promise.all(requests);
 
+        await new Promise((res) => setTimeout(res, 500));
+
         weatherData.forEach((value, index) => {
             savedCities.value[index].weather = value.data;
         });
@@ -44,6 +46,7 @@ const goToCituView = (city) => {
             location: city.location,
         },
         query: {
+            id: city.id,
             latitude: city.coords.lat,
             longitude: city.coords.lon
         }

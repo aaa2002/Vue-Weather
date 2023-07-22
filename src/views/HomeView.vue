@@ -15,7 +15,7 @@
     <ul v-if="searchResults" class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1">
       <p v-if="searchError"> Sorry, something went wrong, please try again.</p>
 
-      <p v-else>No results found.</p>
+      <p v-if="searchResults.length === 0">No results found.</p>
       <li v-for="place in searchResults" :key="place.id" class="py-2 cursor-pointer hover:bg-weather-primary"
         @click="previewCity(place)">
         {{ place.display_name }}
@@ -25,7 +25,7 @@
       <Suspense>
         <CityList />
         <template #fallback>
-          <p>Loading...</p>
+          <CityCardSkeleton />
         </template>
       </Suspense>
     </div>
@@ -37,6 +37,7 @@ import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import CityList from '../components/CityList.vue'
+import CityCardSkeleton from '../components/CityCardSkeleton.vue'
 
 const router = useRouter();
 const searchQuery = ref('');
