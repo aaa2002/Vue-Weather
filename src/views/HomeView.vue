@@ -14,19 +14,29 @@
     </div>
     <ul v-if="searchResults" class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1">
       <p v-if="searchError"> Sorry, something went wrong, please try again.</p>
-      
-      <li v-for="place in searchResults" :key="place.id" class="py-2 cursor-pointer hover:bg-weather-primary" @click="previewCity(place)">
+
+      <p v-else>No results found.</p>
+      <li v-for="place in searchResults" :key="place.id" class="py-2 cursor-pointer hover:bg-weather-primary"
+        @click="previewCity(place)">
         {{ place.display_name }}
       </li>
     </ul>
-    <p v-else>No results found.</p>
+    <div class="flex flex-col gap-4">
+      <Suspense>
+        <CityList />
+        <template #fallback>
+          <p>Loading...</p>
+        </template>
+      </Suspense>
+    </div>
   </main>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
-import {useRouter} from 'vue-router';
+import { useRouter } from 'vue-router';
+import CityList from '../components/CityList.vue'
 
 const router = useRouter();
 const searchQuery = ref('');
