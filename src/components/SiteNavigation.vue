@@ -12,8 +12,7 @@
                 <i class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer"
                     @click="toggleModal"></i>
                 <i class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"
-                    @click="addCity"
-                    v-if="route.query.preview"></i>
+                    @click="addCity" v-if="route.query.preview"></i>
             </div>
 
             <BaseModal :modalActive="modalActive" @closeModal="toggleModal">
@@ -52,26 +51,37 @@
     </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import BaseModal from './BaseModal.vue';
 import { uid } from 'uid';
 
-const savedCities = ref([]);
+interface LocationObj {
+    id: string;
+    location: string;
+    coords: {
+        lat: number;
+        lon: number;
+    };
+}
+
+const savedCities = ref<LocationObj[]>([]);
+
 const route = useRoute();
 const router = useRouter();
 const addCity = () => {
-    if (localStorage.getItem('savedCities')) {
-        savedCities.value = JSON.parse(localStorage.getItem('savedCities'));
+    const savedCitiesData = localStorage.getItem('savedCities');
+    if (savedCitiesData) {
+        savedCities.value = JSON.parse(savedCitiesData);
     }
 
     const locationObj = {
         id: uid(),
-        location: route.params.location,
+        location: route.params.location.toString(),
         coords: {
-            lat: route.query.latitude,
-            lon: route.query.longitude
+            lat: parseFloat(route.query.latitude as string),
+            lon: parseFloat(route.query.longitude as string)
         }
     };
 
